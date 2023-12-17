@@ -2,7 +2,7 @@
 Repository for Qualitative Code Suggestion: A Human-Centric Approach To Qualitative Coding
 
 # Dataset
-The `CVDQuoding` dataset is available upon request. The current repository assumes that the 15 `xml` files would be placed in `data/`
+The `CVDQuoding` dataset is available upon request. The current repository assumes that the 15 `xml` files we will send you will be placed in the `data/raw_xml` directory.
 
 # Installation and environment setup
 To install this repo, first clone it and then execute the following commands (assumes Anaconda is installed on your machine):
