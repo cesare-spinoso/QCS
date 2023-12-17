@@ -31,6 +31,23 @@ class XmlCodeSpan:
             isinstance(self.interview_id, int) and self.interview_id in INTERVIEW_IDS
         ), f"{self.interview_id} is not of type int."
 
+    def __eq__(
+        self, __o: object, ignore_code: bool = False, ignore_label: bool = False
+    ) -> bool:
+        if not isinstance(__o, XmlCodeSpan):
+            return False
+        return (
+            self.text == __o.text
+            and (self.code == __o.code if not ignore_code else True)
+            and self.coder == __o.coder
+            and self.interview_id == __o.interview_id
+            and (self.label == __o.label if not ignore_label else True)
+            and self.left_context == __o.left_context
+            and self.right_context == __o.right_context
+            and self.previous_question == __o.previous_question
+            and self.previous_question_number == __o.previous_question_number
+        )
+
 
 def read_xml_interview_directory(
     directory_path: Path, parser="html.parser"
@@ -71,7 +88,7 @@ def get_code_spans_from_interview_soup(
 
 def filter_code_spans(
     list_code_spans: list[XmlCodeSpan],
-    filter_key: Literal["code", "coder", "source"],
+    filter_key: Literal["code", "coder", "interview_id"],
     filter_value: Union[str, int],
 ) -> list[XmlCodeSpan]:
     """Only keep code spans that match the filter key and value."""

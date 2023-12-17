@@ -44,3 +44,5 @@ QUESTIONS: dict[int, str] = {
     19: "In terms of transparency, how important is it for you to be able to understand how the Xi-Care tool works?",
     20: "Is there something else you'd like to add about ethical aspects in regards to the Xi-Care tool that will be empowered by AI (Justice; Non-maleficence; Autonomy; Beneficence; Explicability/Transparency)?",
 }
+
+NUMBER_OF_QUESTIONS = len(QUESTIONS)

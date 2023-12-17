@@ -1,0 +1,40 @@
+dataset_maker:
+  type: qcs
+  xml_directory: data/raw_xml/
+  coder: 1
+  interviews:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 16
+  left_context: 1000
+  right_context: 1000
+  previous_question: true
+  previous_question_number: true
+  train_val_split: 0.8
+prepare_dataset:
+  span_text: true
+  left_context: true
+  right_context: true
+  previous_question: true
+  previous_question_number: true
+features_to_write:
+  span_text: true
+  left_context: true
+  right_context: true
+  previous_question: true
+  previous_question_number: true
+output_directory: data/jsonl_data/
+write_config_directory: qcs/dataset/config_instances/
+finished_running: true

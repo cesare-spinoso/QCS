@@ -160,6 +160,10 @@ cython_debug/
 #.idea/
 
 # Custom ignores
-data/*.xml
+*.xml
+*.jsonl
 .vscode
 scripts
+# Ignore hydra made outputs
+# Custom made
+outputs/

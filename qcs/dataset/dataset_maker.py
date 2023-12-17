@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 import os
 from pathlib import Path
 import random
@@ -6,31 +5,13 @@ import re
 from typing import Literal, Union
 
 from bs4 import BeautifulSoup, element
-from qcs import SRC_DIRECTORY
+from qcs.dataset.custom_dataclasses import XmlCodeSpansDataset
 
 from qcs.utils.interview_xml import (
     XmlCodeSpan,
     filter_code_spans,
     read_xml_interview_directory,
 )
-
-
-@dataclass
-class XmlCodeSpanDataset:
-    interview_ids: list[int]
-    train: list[list[XmlCodeSpan]]
-    val: list[list[XmlCodeSpan]]
-    test: list[list[XmlCodeSpan]]
-
-    def __post_init__(self) -> None:
-        assert (
-            (len(self.interview_ids) - 1)
-            == len(self.train)
-            == len(self.val)
-            == len(self.test)
-        ), print(
-            f"{len(self.interview_ids)} != {len(self.train)} != {len(self.val)} != {len(self.test)}"
-        )
 
 
 class DatasetMaker:
@@ -293,7 +274,7 @@ class QCSDatasetMaker(DatasetMaker):
         )
         self.train_val_split = train_val_split
 
-    def make_dataset(self) -> XmlCodeSpanDataset:
+    def make_dataset(self) -> XmlCodeSpansDataset:
         # Get the transcripts xml
         xml_interviews = read_xml_interview_directory(self.xml_directory)
         assert set(xml_interviews.keys()) == set(self.interviews)
@@ -318,13 +299,7 @@ class QCSDatasetMaker(DatasetMaker):
             for interview_id, code_spans in code_spans_dict.items()
         }
 
-        # Order based on self.interviews
-        code_spans_dict = {
-            interview_id: code_spans_dict[interview_id]
-            for interview_id in self.interviews
-        }
-
-        # Create train, val, test
+        # Create train, val, test based on self.interviews order
         train_test_spans = DatasetMaker.create_train_test_spans(
             interview_ids=self.interviews, code_spans=code_spans_dict
         )
@@ -333,21 +308,9 @@ class QCSDatasetMaker(DatasetMaker):
         train_spans, val_spans = DatasetMaker.split_test_spans(
             train_spans, ratio=self.train_val_split, shuffle=True
         )
-        return XmlCodeSpanDataset(
+        return XmlCodeSpansDataset(
             interview_ids=self.interviews,
             train=train_spans,
             val=val_spans,
             test=test_spans,
         )
-
-
-qcs_ds_maker = QCSDatasetMaker(
-    xml_directory=SRC_DIRECTORY / ".." / "data",
-    coder=1,
-    interviews=[i for i in range(1, 17) if i != 15],
-    left_context=50,
-    right_context=50,
-    previous_question=True,
-    train_val_split=0.8,
-)
-qcs_ds = qcs_ds_maker.make_dataset()

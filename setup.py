@@ -32,5 +32,6 @@ setup(
         "plotly",
         "omegaconf",
         "hydra-core",
+        "jsonlines",
     ],
 )
