@@ -1,8 +1,16 @@
 # QCS
-Repository for Qualitative Code Suggestion: A Human-Centric Approach To Qualitative Coding
+Repository for [Qualitative Code Suggestion: A Human-Centric Approach To Qualitative Coding](https://aclanthology.org/2023.findings-emnlp.993/) by [Cesare Spinoso-Di Piano](https://cesare-spinoso.github.io/), [Samira Abbasgholizadeh-Rahimi](https://rahimislab.ca/) and [Jackie Chi Kit Cheung](https://www.cs.mcgill.ca/~jcheung/index.html).
 
-# Dataset
-The `CVDQuoding` dataset is available upon request. The current repository assumes that the 15 `xml` files we will send you will be placed in the `data/raw_xml` directory.
+If you use our dataset, code or findings, please cite us:
+```
+@inproceedings{spinoso-di-piano-etal-2023-qualitative,
+    title = "Qualitative Code Suggestion: A Human-Centric Approach to Qualitative Coding",
+    author = "Spinoso-Di Piano, Cesare and Rahimi, Samira and Cheung, Jackie",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2023",
+    year = "2023",
+}
+
+```
 
 # Installation and environment setup
 To install this repo, first clone it and then execute the following commands (assumes Anaconda is installed on your machine):
@@ -13,3 +21,7 @@ Activate your environment with `conda activate my_env`, and then execute the fol
 ```
 make setup
 ```
+
+# Dataset
+The `CVDQuoding` dataset is available upon request. The current repository assumes that the 15 `xml` files we will send you will be placed in the `data/raw_xml` directory.
+
